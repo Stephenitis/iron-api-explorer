@@ -1,0 +1,27 @@
+{
+    "IronWorker": {
+        "name": "IronWorker",
+        "protocol": "http",
+        "baseURL": "worker-aws-us-east-1.iron.io",
+        "publicPath": "/2",
+        "auth": "key",
+        "keyParam":"oauth"
+    },
+        "IronMQ": {
+        "name": "IronMQ",
+        "protocol": "https",
+        "baseURL": " https://mq-aws-us-east-1.iron.io/1/",
+        "publicPath": "",
+        "privatePath": "/v2",
+        "auth": "oauth2",
+        "oauth2": {
+            "type": "authorization-code",
+            "baseSite": "https://iron.io/",
+            "authorizeURL": "oauth2/authenticate",
+            "accessTokenURL": "oauth2/access_token",
+            "customHeaders": "",
+            "tokenName": "oauth_token"
+        },
+        "keyParam":""
+    }
+}

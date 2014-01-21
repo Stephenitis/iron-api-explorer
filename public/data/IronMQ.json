@@ -1,0 +1,529 @@
+{
+   "endpoints":[
+      {
+         "name":"Queues",
+         "methods":[
+            {
+               "MethodName":"Profile Information",
+               "Synopsis":"Returns profile information for a given user.",
+               "HTTPMethod":"GET",
+               "URI":"/users/:USER_ID",
+               "RequiresOAuth":"Y",
+               "parameters":[
+                  {
+                     "Name":"USER_ID",
+                     "Required":"Y",
+                     "Default":"1297336",
+                     "Type":"int",
+                     "Description":"A foursquare user id (e.g. 1297336)"
+                  }
+               ]
+            },
+            {
+               "MethodName":"User's Leaderboard",
+               "Synopsis":"Returns the user's Leaderboard",
+               "HTTPMethod":"GET",
+               "URI":"/users/leaderboard",
+               "RequiresOAuth":"Y",
+               "parameters":[
+                  {
+                     "Name":"neighbors",
+                     "Required":"N",
+                     "Default":"2",
+                     "Type":"int",
+                     "Description":"The number of friends' scores to return."
+                  }
+               ]
+            },
+            {
+               "MethodName":"User's Requests",
+               "Synopsis":"Returns the user's Leaderboard",
+               "HTTPMethod":"GET",
+               "URI":"/users/requests",
+               "RequiresOAuth":"Y"
+            },
+            {
+               "MethodName":"Find User",
+               "Synopsis":"Helps a user locate friends.",
+               "HTTPMethod":"GET",
+               "URI":"/users/search",
+               "RequiresOAuth":"Y",
+               "parameters":[
+                  {
+                     "Name":"phone",
+                     "Required":"N",
+                     "Default":"91712344567,123450",
+                     "Type":"int",
+                     "Description":"A comma-delimited list of phone numbers to look for."
+                  },
+                  {
+                     "Name":"email",
+                     "Required":"N",
+                     "Default":"foo@bar.com,alice@baz.com",
+                     "Type":"string",
+                     "Description":"A comma-delimited list of email addresses to look for."
+                  },
+                  {
+                     "Name":"twitter",
+                     "Required":"N",
+                     "Default":"dens,sesamestreet",
+                     "Type":"string",
+                     "Description":"A comma-delimited list of Twitter handles to look for."
+                  },
+                  {
+                     "Name":"twitterSource",
+                     "Required":"N",
+                     "Default":"krave",
+                     "Type":"string",
+                     "Description":"A single Twitter handle. Results will be users that this handle follows on Twitter who use Foursquare."
+                  },
+                  {
+                     "Name":"fbid",
+                     "Required":"N",
+                     "Default":"123,456",
+                     "Type":"int",
+                     "Description":"A comma-delimited list of Facebook ID's to look for."
+                  },
+                  {
+                     "Name":"name",
+                     "Required":"N",
+                     "Default":"Fred Fredrickson",
+                     "Type":"string",
+                     "Description":"A single string to search for in users' names."
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "name":"Messages",
+         "methods":[
+            {
+               "MethodName":"User Badges",
+               "Synopsis":"Returns badges for a given user.",
+               "HTTPMethod":"GET",
+               "URI":"/users/:USER_ID/badges",
+               "RequiresOAuth":"Y",
+               "parameters":[
+                  {
+                     "Name":"USER_ID",
+                     "Required":"Y",
+                     "Default":"1297336",
+                     "Type":"int",
+                     "Description":"A foursquare user id (e.g. 1297336)"
+                  }
+               ]
+            },
+            {
+               "MethodName":"User Checkins",
+               "Synopsis":"Returns a history of checkins for the authenticated user.",
+               "HTTPMethod":"GET",
+               "URI":"/users/:USER_ID/checkins",
+               "RequiresOAuth":"Y",
+               "parameters":[
+                  {
+                     "Name":"USER_ID",
+                     "Required":"Y",
+                     "Default":"self",
+                     "Type":"string",
+                     "Description":"For now, only self is supported."
+                  },
+                  {
+                     "Name":"limit",
+                     "Required":"N",
+                     "Default":"100",
+                     "Type":"int",
+                     "Description":"Number of results to return, up to 250."
+                  },
+                  {
+                     "Name":"offset",
+                     "Required":"N",
+                     "Default":"100",
+                     "Type":"int",
+                     "Description":"The number of results to skip. Used to page through results."
+                  },
+                  {
+                     "Name":"sort",
+                     "Required":"N",
+                     "Default":"newestfirst",
+                     "Type":"string",
+                     "Description":"How to sort the returned checkins. Can be newestfirst or oldestfirst."
+                  },
+                  {
+                     "Name":"afterTimestamp",
+                     "Required":"N",
+                     "Default":"1279044824",
+                     "Type":"int",
+                     "Description":"Retrieve the first results to follow these seconds since epoch. This should be useful for paging forward in time, or when polling for changes. To avoid missing results when polling, we recommend subtracting several seconds from the last poll time and then de-duplicating."
+                  },
+                  {
+                     "Name":"beforeTimestamp",
+                     "Required":"N",
+                     "Default":"1279044824",
+                     "Type":"int",
+                     "Description":"Retrieve the first results prior to these seconds since epoch. Useful for paging backward in time."
+                  }
+               ]
+            },
+            {
+               "MethodName":"List Friends",
+               "Synopsis":"Returns an array of a user's friends.",
+               "HTTPMethod":"GET",
+               "URI":"/users/:USER_ID/friends",
+               "RequiresOAuth":"Y",
+               "parameters":[
+                  {
+                     "Name":"USER_ID",
+                     "Required":"Y",
+                     "Default":"1297336",
+                     "Type":"int",
+                     "Description":"A foursquare user id (e.g. 1297336). Pass self to get friends of the acting user."
+                  },
+                  {
+                     "Name":"limit",
+                     "Required":"N",
+                     "Default":"100",
+                     "Type":"int",
+                     "Description":"Number of results to return, up to 500."
+                  },
+                  {
+                     "Name":"offset",
+                     "Required":"N",
+                     "Default":"100",
+                     "Type":"int",
+                     "Description":"Used to page through results."
+                  }
+               ]
+            },
+            {
+               "MethodName":"Lists",
+               "Synopsis":"A user's lists.",
+               "HTTPMethod":"GET",
+               "URI":"/users/:USER_ID/lists",
+               "RequiresOAuth":"Y",
+               "parameters":[
+                  {
+                     "Name":"USER_ID",
+                     "Required":"Y",
+                     "Default":"1297336",
+                     "Type":"int",
+                     "Description":"A foursquare user id (e.g. 1297336). Pass self to get lists of the acting user."
+                  },
+                  {
+                     "Name":"group",
+                     "Required":"N",
+                     "Default":"edited",
+                     "Type":"string",
+                     "Description":"can be created (lists created by this user), edited (other people's lists this user has edited), followed (lists this user follows), friends (lists from this user's friends), and suggested (lists relevant to the user's current location)."
+                  },
+                  {
+                     "Name":"ll",
+                     "Required":"Y",
+                     "Default":"40.7,-74",
+                     "Type":"int",
+                     "Description":"Location of the user, required in order to receive the suggested group."
+                  }
+               ] 
+            },
+            {
+               "MethodName":"Mayorships",
+               "Synopsis":"A user's mayorships.",
+               "HTTPMethod":"GET",
+               "URI":"/users/:USER_ID/mayorships",
+               "RequiresOAuth":"Y",
+               "parameters":[
+                  {
+                     "Name":"USER_ID",
+                     "Required":"Y",
+                     "Default":"1297336",
+                     "Type":"int",
+                     "Description":"A foursquare user id (e.g. 1297336)."
+                  }
+               ] 
+            },
+            {
+               "MethodName":"Photos",
+               "Synopsis":"Returns photos from a user.",
+               "HTTPMethod":"GET",
+               "URI":"/users/:USER_ID/photos",
+               "RequiresOAuth":"Y",
+               "parameters":[
+                  {
+                     "Name":"USER_ID",
+                     "Required":"Y",
+                     "Default":"self",
+                     "Type":"string",
+                     "Description":"For now, only self is supported."
+                  },
+                  {
+                     "Name":"limit",
+                     "Required":"N",
+                     "Default":"100",
+                     "Type":"int",
+                     "Description":"Number of results to return, up to 500."
+                  },
+                  {
+                     "Name":"offset",
+                     "Required":"N",
+                     "Default":"100",
+                     "Type":"int",
+                     "Description":"Used to page through results."
+                  }
+               ] 
+            },
+            {
+               "MethodName":"Venue History",
+               "Synopsis":"Returns a list of all venues visited by the specified user, along with how many visits and when they were last there.",
+               "HTTPMethod":"GET",
+               "URI":"/users/:USER_ID/venuehistory",
+               "RequiresOAuth":"Y",
+               "parameters":[
+                  {
+                     "Name":"USER_ID",
+                     "Required":"Y",
+                     "Default":"self",
+                     "Type":"string",
+                     "Description":"For now, only self is supported."
+                  },
+                  {
+                     "Name":"beforeTimestamp",
+                     "Required":"N",
+                     "Default":"123456789",
+                     "Type":"int",
+                     "Description":"Seconds since epoch."
+                  },
+                  {
+                     "Name":"afterTimestamp",
+                     "Required":"N",
+                     "Default":"123456789",
+                     "Type":"int",
+                     "Description":"Seconds since epoch."
+                  },
+                  {
+                     "Name":"categoryId",
+                     "Required":"N",
+                     "Default":"asad13242ljla",
+                     "Type":"string",
+                     "Description":"Limits returned venues to those in this category. If specifying a top-level category, all sub-categories will also match the query."
+                  }
+               ] 
+            }
+         ]
+      },
+      {
+         "name":"Push Queue",
+         "methods":[
+            {
+               "MethodName":"User Badges",
+               "Synopsis":"Returns badges for a given user.",
+               "HTTPMethod":"GET",
+               "URI":"/users/:USER_ID/badges",
+               "RequiresOAuth":"Y",
+               "parameters":[
+                  {
+                     "Name":"USER_ID",
+                     "Required":"Y",
+                     "Default":"1297336",
+                     "Type":"int",
+                     "Description":"A foursquare user id (e.g. 1297336)"
+                  }
+               ]
+            },
+            {
+               "MethodName":"User Checkins",
+               "Synopsis":"Returns a history of checkins for the authenticated user.",
+               "HTTPMethod":"GET",
+               "URI":"/users/:USER_ID/checkins",
+               "RequiresOAuth":"Y",
+               "parameters":[
+                  {
+                     "Name":"USER_ID",
+                     "Required":"Y",
+                     "Default":"self",
+                     "Type":"string",
+                     "Description":"For now, only self is supported."
+                  },
+                  {
+                     "Name":"limit",
+                     "Required":"N",
+                     "Default":"100",
+                     "Type":"int",
+                     "Description":"Number of results to return, up to 250."
+                  },
+                  {
+                     "Name":"offset",
+                     "Required":"N",
+                     "Default":"100",
+                     "Type":"int",
+                     "Description":"The number of results to skip. Used to page through results."
+                  },
+                  {
+                     "Name":"sort",
+                     "Required":"N",
+                     "Default":"newestfirst",
+                     "Type":"string",
+                     "Description":"How to sort the returned checkins. Can be newestfirst or oldestfirst."
+                  },
+                  {
+                     "Name":"afterTimestamp",
+                     "Required":"N",
+                     "Default":"1279044824",
+                     "Type":"int",
+                     "Description":"Retrieve the first results to follow these seconds since epoch. This should be useful for paging forward in time, or when polling for changes. To avoid missing results when polling, we recommend subtracting several seconds from the last poll time and then de-duplicating."
+                  },
+                  {
+                     "Name":"beforeTimestamp",
+                     "Required":"N",
+                     "Default":"1279044824",
+                     "Type":"int",
+                     "Description":"Retrieve the first results prior to these seconds since epoch. Useful for paging backward in time."
+                  }
+               ]
+            },
+            {
+               "MethodName":"List Friends",
+               "Synopsis":"Returns an array of a user's friends.",
+               "HTTPMethod":"GET",
+               "URI":"/users/:USER_ID/friends",
+               "RequiresOAuth":"Y",
+               "parameters":[
+                  {
+                     "Name":"USER_ID",
+                     "Required":"Y",
+                     "Default":"1297336",
+                     "Type":"int",
+                     "Description":"A foursquare user id (e.g. 1297336). Pass self to get friends of the acting user."
+                  },
+                  {
+                     "Name":"limit",
+                     "Required":"N",
+                     "Default":"100",
+                     "Type":"int",
+                     "Description":"Number of results to return, up to 500."
+                  },
+                  {
+                     "Name":"offset",
+                     "Required":"N",
+                     "Default":"100",
+                     "Type":"int",
+                     "Description":"Used to page through results."
+                  }
+               ]
+            },
+            {
+               "MethodName":"Lists",
+               "Synopsis":"A user's lists.",
+               "HTTPMethod":"GET",
+               "URI":"/users/:USER_ID/lists",
+               "RequiresOAuth":"Y",
+               "parameters":[
+                  {
+                     "Name":"USER_ID",
+                     "Required":"Y",
+                     "Default":"1297336",
+                     "Type":"int",
+                     "Description":"A foursquare user id (e.g. 1297336). Pass self to get lists of the acting user."
+                  },
+                  {
+                     "Name":"group",
+                     "Required":"N",
+                     "Default":"edited",
+                     "Type":"string",
+                     "Description":"can be created (lists created by this user), edited (other people's lists this user has edited), followed (lists this user follows), friends (lists from this user's friends), and suggested (lists relevant to the user's current location)."
+                  },
+                  {
+                     "Name":"ll",
+                     "Required":"Y",
+                     "Default":"40.7,-74",
+                     "Type":"int",
+                     "Description":"Location of the user, required in order to receive the suggested group."
+                  }
+               ] 
+            },
+            {
+               "MethodName":"Mayorships",
+               "Synopsis":"A user's mayorships.",
+               "HTTPMethod":"GET",
+               "URI":"/users/:USER_ID/mayorships",
+               "RequiresOAuth":"Y",
+               "parameters":[
+                  {
+                     "Name":"USER_ID",
+                     "Required":"Y",
+                     "Default":"1297336",
+                     "Type":"int",
+                     "Description":"A foursquare user id (e.g. 1297336)."
+                  }
+               ] 
+            },
+            {
+               "MethodName":"Photos",
+               "Synopsis":"Returns photos from a user.",
+               "HTTPMethod":"GET",
+               "URI":"/users/:USER_ID/photos",
+               "RequiresOAuth":"Y",
+               "parameters":[
+                  {
+                     "Name":"USER_ID",
+                     "Required":"Y",
+                     "Default":"self",
+                     "Type":"string",
+                     "Description":"For now, only self is supported."
+                  },
+                  {
+                     "Name":"limit",
+                     "Required":"N",
+                     "Default":"100",
+                     "Type":"int",
+                     "Description":"Number of results to return, up to 500."
+                  },
+                  {
+                     "Name":"offset",
+                     "Required":"N",
+                     "Default":"100",
+                     "Type":"int",
+                     "Description":"Used to page through results."
+                  }
+               ] 
+            },
+            {
+               "MethodName":"Venue History",
+               "Synopsis":"Returns a list of all venues visited by the specified user, along with how many visits and when they were last there.",
+               "HTTPMethod":"GET",
+               "URI":"/users/:USER_ID/venuehistory",
+               "RequiresOAuth":"Y",
+               "parameters":[
+                  {
+                     "Name":"USER_ID",
+                     "Required":"Y",
+                     "Default":"self",
+                     "Type":"string",
+                     "Description":"For now, only self is supported."
+                  },
+                  {
+                     "Name":"beforeTimestamp",
+                     "Required":"N",
+                     "Default":"123456789",
+                     "Type":"int",
+                     "Description":"Seconds since epoch."
+                  },
+                  {
+                     "Name":"afterTimestamp",
+                     "Required":"N",
+                     "Default":"123456789",
+                     "Type":"int",
+                     "Description":"Seconds since epoch."
+                  },
+                  {
+                     "Name":"categoryId",
+                     "Required":"N",
+                     "Default":"asad13242ljla",
+                     "Type":"string",
+                     "Description":"Limits returned venues to those in this category. If specifying a top-level category, all sub-categories will also match the query."
+                  }
+               ] 
+            }
+         ]
+      }
+   ]
+}
